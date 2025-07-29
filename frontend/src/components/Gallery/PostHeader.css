@@ -1,0 +1,84 @@
+/* src/components/Gallery/PostHeader.css */
+
+/* Post Header */
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 16px;
+  border-bottom: 1px solid #333333; /* Changed from black to visible border */
+  background: rgb(0, 0, 0);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Reduced gap to bring elements closer */
+  margin-left: -80%; /* Shift the entire user info section to the left */
+}
+
+.post-header .user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px; /* Reduced from 14px to match smaller avatar */
+  color: white;
+  font-weight: bold;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: 600;
+  color: #ffffff; /* Changed from dark #262626 to white */
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.location {
+  font-size: 12px;
+  color: #8e8e8e;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.more-options {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #ffffff; /* Changed from dark #262626 to white */
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.more-options:hover {
+  background: #333333; /* Changed from light gray to dark gray */
+}
+
+.post-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ffffff; /* Changed from gray #8e8e8e to white for better visibility */
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.post-close:hover {
+  color: #cccccc; /* Light gray on hover instead of dark */
+}

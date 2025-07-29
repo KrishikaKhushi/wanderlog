@@ -1,0 +1,62 @@
+/* src/components/Gallery/SlideshowView.css */
+
+.slideshow-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.slideshow-container {
+  width: 375px; /* iPhone-like width */
+  height: 667px; /* iPhone-like height (16:9 aspect ratio) */
+  background: #000;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Slideshow image */
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed back to contain so images don't get cut */
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.slideshow-image:hover {
+  transform: scale(1.02);
+}
+
+/* Fullscreen image browser default styles */
+img:-webkit-full-screen,
+img:-moz-full-screen,
+img:-ms-fullscreen,
+img:fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: contain !important;
+  background: black !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 99999 !important;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .slideshow-container {
+    width: 280px; /* Smaller for mobile */
+    height: 497px; /* Maintain aspect ratio */
+  }
+}

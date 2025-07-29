@@ -1,0 +1,83 @@
+/* src/components/Journal/EntryForm.css */
+.entry-section {
+  padding: 1rem;
+}
+
+.entry-textarea {
+  width: 100%;
+  min-height: 280px;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.entry-textarea::placeholder {
+  color: #cccccc;
+}
+
+.entry-textarea:focus {
+  outline: none;
+  border-color: #1D9BF0;
+  box-shadow: 0 0 10px rgba(124, 93, 166, 0.3);
+}
+
+.save-entry-button {
+  background: linear-gradient(135deg, #2B509E, #6696ff);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.save-entry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(124, 93, 166, 0.3);
+}
+
+.cancel-entry-button {
+  background: linear-gradient(135deg, #a52e2e, #e47070);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cancel-entry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
+}
+
+.entry-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .entry-textarea {
+    min-height: 200px;
+  }
+  
+  .entry-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

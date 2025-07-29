@@ -1,0 +1,112 @@
+.account-page {
+  position: relative;
+  padding: 2rem;
+  background-color: #000000;
+  color: white;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Background image layer (behind lights) */
+.account-page::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  background-image: url('../assets/bg-image.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Corner light glow layer (above image but behind content) */
+.account-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(circle at top left, rgba(43, 80, 158, 0.3), transparent 40%),
+              radial-gradient(circle at top right, rgba(43, 80, 158, 0.25), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(43, 80, 158, 0.25), transparent 40%),
+              radial-gradient(circle at bottom right, rgba(43, 80, 158, 0.3), transparent 40%);
+}
+
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: -1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #2B509E;
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.back-button:hover {
+  color: #6696ff;
+}
+
+.account-page h1 {
+  font-size: 2.5rem;
+  color: #2B509E;
+  margin: 0;
+}
+
+/* Messages */
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.message.success {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #4ade80;
+}
+
+.message.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .account-page {
+    padding: 1rem;
+  }
+
+  .account-page h1 {
+    font-size: 2rem;
+  }
+}

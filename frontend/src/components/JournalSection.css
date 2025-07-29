@@ -1,0 +1,14 @@
+/* src/components/JournalSection.css */
+.journal-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .journal-section {
+    padding: 0.5rem;
+  }
+}

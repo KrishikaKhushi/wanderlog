@@ -1,0 +1,78 @@
+/* src/components/GallerySection.css */
+
+.gallery-section {
+  width: 100%;
+  max-width: 800px;
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* Photo preview container */
+.photo-preview {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow-y: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+  justify-content: center;
+}
+
+.photo-preview.slideshow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Gallery header styles */
+.gallery-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.gallery-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(204, 204, 204);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.no-photos-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+.no-photos-message p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.566);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  max-width: 400px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 0.5rem;
+    position: relative;
+  }
+}

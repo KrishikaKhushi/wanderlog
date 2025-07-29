@@ -1,0 +1,42 @@
+/* src/components/Journal/EmptyJournal.css */
+.empty-journal {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-message {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.empty-subtitle {
+  font-size: 1.2rem;
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+.write-entry-button {
+  background: linear-gradient(135deg, #2B509E, #6696ff);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.write-entry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 93, 166, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .empty-journal {
+    padding: 2rem 1rem;
+  }
+}

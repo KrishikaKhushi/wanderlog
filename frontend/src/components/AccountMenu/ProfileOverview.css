@@ -1,0 +1,79 @@
+.account-section {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.account-section h2 {
+  color: #2B509E;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  text-align: left;
+}
+
+/* Profile Summary */
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(43, 80, 158, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(43, 80, 158, 0.3);
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 552px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: #2B509E;
+}
+
+.profile-info p {
+  margin: 0.25rem 0;
+  color: #AAAAAA;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .account-section h2 {
+    text-align: center;
+  }
+}

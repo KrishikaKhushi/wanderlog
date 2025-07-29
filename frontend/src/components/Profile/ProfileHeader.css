@@ -1,0 +1,111 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1450px;
+  margin-bottom: 2rem;
+}
+
+/* Customizable Back Button */
+.back-button {
+  background: none;
+  border: none;
+  color: #2B509E;
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+.back-button:hover {
+  color: #4781ff;
+  background: rgba(43, 80, 158, 0.1);
+  transform: scale(1.1);
+}
+
+/* Size variations */
+.back-button.small {
+  font-size: 1.5rem;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.back-button.large {
+  font-size: 2.5rem;
+  min-width: 60px;
+  min-height: 60px;
+}
+
+/* Style variations */
+.back-button.rounded {
+  border-radius: 25px;
+  background: rgba(43, 80, 158, 0.2);
+  border: 2px solid rgba(43, 80, 158, 0.3);
+}
+
+.back-button.square {
+  border-radius: 8px;
+  background: rgba(43, 80, 158, 0.2);
+  border: 2px solid rgba(43, 80, 158, 0.3);
+}
+
+/* Position variations */
+.back-button.top-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.back-button.top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.profile-header h1 {
+  color: #2B509E;
+  font-size: 2.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .back-button {
+    font-size: 1.8rem;
+    min-width: 45px;
+    min-height: 45px;
+  }
+
+  .back-button.small {
+    font-size: 1.3rem;
+    min-width: 35px;
+    min-height: 35px;
+  }
+
+  .back-button.large {
+    font-size: 2.2rem;
+    min-width: 55px;
+    min-height: 55px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-button {
+    font-size: 1.5rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}

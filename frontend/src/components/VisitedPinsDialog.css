@@ -1,0 +1,73 @@
+/* src/components/VisitedPinsDialog.css */
+
+.visited-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.visited-dialog {
+  background: #111;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 25px #ffffff;
+  position: relative;
+  text-align: center;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.visited-dialog h2 {
+  font-size: 1.8rem;
+  color: #eee;
+  margin-bottom: 1rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #ccc;
+  cursor: pointer;
+  outline: none;
+}
+
+.visited-country-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.visited-country-list li {
+  background: #1c1c1c;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #fdfdfd;
+  transition: background 0.3s ease;
+}
+
+.visited-country-list li:hover {
+  background: #2a2a2a;
+}
+
+.no-visits {
+  font-style: italic;
+  color: #aaa;
+  margin-top: 1rem;
+}

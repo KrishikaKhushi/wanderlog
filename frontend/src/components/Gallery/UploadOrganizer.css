@@ -1,0 +1,122 @@
+/* src/components/Gallery/UploadOrganizer.css */
+
+.upload-organizer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10002;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.upload-organizer-container {
+  background: #000000;
+  border-radius: 12px;
+  border: 1px solid #333333;
+  overflow: hidden;
+  width: 90vw;
+  max-width: 800px; /* Reduced from 1200px */
+  max-height: 80vh; /* Reduced from 95vh */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.upload-organizer-container > * {
+  flex-shrink: 0;
+}
+
+.upload-organizer-container > .folder-manager,
+.upload-organizer-container > .post-creator {
+  flex: 1;
+  min-height: 0; /* Important for flex children to be scrollable */
+}
+
+.organizer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px; /* Reduced padding */
+  border-bottom: 1px solid #333333;
+  background: #000000;
+}
+
+.organizer-header h3 {
+  margin: 0;
+  font-size: 16px; /* Reduced from 18px */
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.organizer-close {
+  background: none;
+  border: none;
+  font-size: 20px; /* Reduced from 24px */
+  cursor: pointer;
+  color: #8e8e8e;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.organizer-close:hover {
+  color: #ffffff;
+  background: #333333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .upload-organizer-container {
+    width: 95vw;
+    max-width: 100%;
+    max-height: 90vh;
+  }
+  
+  .organizer-header {
+    padding: 12px 16px;
+  }
+  
+  .organizer-header h3 {
+    font-size: 14px;
+  }
+  
+  .organizer-close {
+    font-size: 18px;
+  }
+}
+
+.uploading-indicator {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.upload-progress {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #666;
+}

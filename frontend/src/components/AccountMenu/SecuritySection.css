@@ -1,0 +1,10 @@
+/* SecuritySection inherits base styles from AccountInformation.css */
+/* This file can be used for security-specific styling overrides */
+
+.security-section {
+  /* Add any security-specific styling here */
+}
+
+.security-button {
+  /* Add any security-specific button styling here */
+}

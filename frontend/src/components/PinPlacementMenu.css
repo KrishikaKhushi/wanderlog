@@ -1,0 +1,98 @@
+/* ========================================
+   PIN PLACEMENT MENU COMPONENT
+   ======================================== */
+
+.pin-slideout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1a346cb8;
+  color: white;
+  z-index: 1000;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.pin-slideout.open {
+  transform: translateX(0);
+}
+
+.pin-slideout h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.pin-slideout label {
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.pin-slideout fieldset {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ffffff80;
+  padding: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.pin-slideout legend {
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffffcc;
+  padding: 0 5px;
+  box-sizing: border-box;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.pin-slideout p {
+  margin-top: auto;
+  font-size: 14px;
+  color: #e0e0e0;
+  box-sizing: border-box;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.pin-slideout hr {
+  margin: 1rem 0;
+  border-color: #ffffff40;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.pin-slideout h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  box-sizing: border-box;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .pin-slideout {
+    width: 280px;
+  }
+}

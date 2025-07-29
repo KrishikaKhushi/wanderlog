@@ -1,0 +1,112 @@
+/* Profile Avatar Component - ORIGINAL POSITIONING */
+.profile-pic-container {
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove any transform or positioning that might affect layout */
+.main-profile-avatar {
+  /* No additional positioning styles */
+}
+
+/* Size Variants - ORIGINAL SIZES */
+.profile-avatar-small {
+  width: 40px;
+  height: 40px;
+}
+
+.profile-avatar-medium {
+  width: 60px;
+  height: 60px;
+}
+
+.profile-avatar-large {
+  width: 200px;
+  height: 200px;
+}
+
+.profile-avatar-xlarge {
+  width: 300px;  /* Original large size */
+  height: 300px;
+}
+
+/* Profile Picture - ORIGINAL STYLING */
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 5px solid #000000;
+  border-radius: 50%;
+}
+
+.profile-pic.hidden {
+  display: none;
+}
+
+/* Placeholder - ORIGINAL STYLING */
+.profile-pic-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 5px solid #000000;
+}
+
+.profile-avatar-small .profile-pic-placeholder {
+  font-size: 0.875rem;
+}
+
+.profile-avatar-medium .profile-pic-placeholder {
+  font-size: 1.25rem;
+}
+
+.profile-avatar-large .profile-pic-placeholder {
+  font-size: 4rem;
+}
+
+.profile-avatar-xlarge .profile-pic-placeholder {
+  font-size: 6rem;  /* Original size */
+}
+
+/* Interactive States */
+.profile-pic-container.clickable {
+  cursor: pointer;
+}
+
+.profile-pic-container.clickable:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Design - ORIGINAL */
+@media (max-width: 768px) {
+  .profile-avatar-xlarge {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-avatar-xlarge .profile-pic-placeholder {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-avatar-xlarge {
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-avatar-xlarge .profile-pic-placeholder {
+    font-size: 3rem;
+  }
+}

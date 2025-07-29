@@ -1,0 +1,101 @@
+/* src/components/Gallery/PostInfo.css */
+
+/* Post Info */
+.post-info {
+  padding: 4px 16px 20px;
+  background: rgb(0, 0, 0);
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar styling */
+.post-info::-webkit-scrollbar {
+  width: 4px;
+}
+
+.post-info::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.post-info::-webkit-scrollbar-thumb {
+  background: #484848;
+  border-radius: 2px;
+}
+
+.post-info::-webkit-scrollbar-thumb:hover {
+  background: #888888;
+}
+
+.likes-count {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #c7c7c7;
+}
+
+.post-caption {
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+.post-caption .username {
+  font-weight: 600;
+  margin-right: 8px;
+  color: #adadad;
+}
+
+.caption-text {
+  color: #b1b1b1; /* Changed from #262626 to white for visibility on black background */
+}
+
+.view-comments {
+  color: #707070;
+  font-size: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.view-comments:hover {
+  color: #aeaeae;
+}
+
+.recent-comment {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #7e7e7e;
+}
+
+.recent-comment .username {
+  font-weight: 600;
+  margin-right: 8px;
+  color: #adadad;
+}
+
+.tagged-people-display {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.tagged-person {
+  color: #0095f6;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.tagged-person:hover {
+  text-decoration: underline;
+}
+
+.post-location {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #8e8e8e;
+}
+
+.post-time {
+  color: #8e8e8e;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}

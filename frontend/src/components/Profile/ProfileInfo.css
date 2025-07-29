@@ -1,0 +1,74 @@
+/* Profile Info Component - ORIGINAL POSITIONING */
+.profile-text {
+  flex: 1;
+  text-align: left;
+}
+
+.profile-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.profile-username {
+  font-size: 1.2rem;
+  color: #bbbbbb;
+  margin-bottom: 1rem;
+}
+
+.profile-bio-section {
+  margin-bottom: 1rem;
+}
+
+.profile-bio {
+  font-size: 1rem;
+  max-width: 500px;
+  margin-bottom: 1rem;
+  color: #dddddd;
+  line-height: 1.5;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-location,
+.profile-email,
+.profile-phone,
+.profile-joined {
+  font-size: 1rem;
+  color: #aaaaaa;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-location {
+  margin-bottom: 1.5rem;
+}
+
+/* Remove margin from profile-details to prevent spacing issues */
+.profile-details {
+  margin-top: 0;
+}
+
+/* Responsive Design - ORIGINAL */
+@media (max-width: 768px) {
+  .profile-text {
+    text-align: center;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-name {
+    font-size: 1.3rem;
+  }
+}

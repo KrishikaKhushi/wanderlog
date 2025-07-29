@@ -1,0 +1,63 @@
+.profile-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.profile-action-button {
+  background-color: #ffffff;
+  color: #000;
+  border: 2px solid #000000;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.profile-action-button:hover {
+  background-color: #eeeeee;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-action-button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-actions {
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .profile-action-button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .profile-action-button img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-action-button {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+}

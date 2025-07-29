@@ -1,0 +1,332 @@
+/* src/components/Gallery/FolderManager.css */
+
+.folder-manager {
+  padding: 16px;
+  height: 100%;
+  max-height: 75vh; /* Much more compact */
+  max-width: 800px; /* Limit width */
+  margin: 0 auto; /* Center the component */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #000000;
+}
+
+/* Custom Scrollbar Styles */
+.folder-manager::-webkit-scrollbar {
+  width: 6px;
+}
+
+.folder-manager::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.folder-manager::-webkit-scrollbar-thumb {
+  background: #666666;
+  border-radius: 3px;
+}
+
+.folder-manager::-webkit-scrollbar-thumb:hover {
+  background: #888888;
+}
+
+.unorganized-section h4,
+.folders-header h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.unorganized-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 6px;
+  min-height: 80px; /* Reduced from 100px */
+  padding: 12px;
+  border: 2px dashed #333333;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+  background: #000000;
+}
+
+.unorganized-grid:hover {
+  border-color: #2B509E;
+}
+
+.unorganized-image {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+.unorganized-image:active {
+  cursor: grabbing;
+}
+
+.unorganized-image:hover {
+  transform: scale(1.05);
+}
+
+.unorganized-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #8e8e8e;
+  font-style: italic;
+  padding: 16px;
+}
+
+.folders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-folder-btn {
+  background: #2B509E;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 13px;
+}
+
+.add-folder-btn:hover {
+  background: #3460c0;
+}
+
+.folders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Even smaller folders for narrow width */
+  gap: 12px;
+}
+
+.post-folder {
+  border: 1px solid #333333;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000000;
+  transition: border-color 0.2s ease;
+}
+
+.post-folder:hover {
+  border-color: #2B509E;
+}
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px; /* Reduced padding */
+  background: #111111;
+  border-bottom: 1px solid #333333;
+}
+
+.folder-name {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.remove-folder-btn {
+  background: #ff3040;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.remove-folder-btn:hover {
+  background: #d63031;
+}
+
+.folder-drop-zone {
+  min-height: 100px; /* Reduced from 150px */
+  padding: 12px;
+  transition: background 0.2s ease;
+  background: #000000;
+}
+
+.folder-drop-zone:hover {
+  background: #111111;
+}
+
+.folder-drop-zone.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #333333;
+  margin: 12px;
+  border-radius: 6px;
+}
+
+.drop-placeholder {
+  text-align: center;
+  color: #8e8e8e;
+}
+
+.drop-icon {
+  font-size: 24px; /* Reduced from 32px */
+  margin-bottom: 6px;
+}
+
+.drop-placeholder p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.folder-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); /* Smaller images */
+  gap: 6px;
+}
+
+.folder-image {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+.folder-image:active {
+  cursor: grabbing;
+}
+
+.folder-image:hover {
+  transform: scale(1.05);
+}
+
+.folder-image:hover .remove-image-btn {
+  opacity: 1;
+}
+
+.folder-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unorganized-image.image-error,
+.folder-image.image-error {
+  background: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8e8e8e;
+  font-size: 11px;
+}
+
+.unorganized-image.image-error::after,
+.folder-image.image-error::after {
+  content: "❌";
+  font-size: 14px;
+}
+
+.folder-info {
+  padding: 8px 12px;
+  background: #111111;
+  text-align: center;
+  font-size: 11px;
+  color: #8e8e8e;
+  border-top: 1px solid #333333;
+}
+
+.organizer-actions {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid #333333;
+  background: #000000;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.help-text {
+  margin-bottom: 12px;
+  color: #8e8e8e;
+  font-size: 13px;
+}
+
+.proceed-btn {
+  background: #2B509E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 14px;
+}
+
+.proceed-btn:disabled {
+  background: #333333;
+  cursor: not-allowed;
+}
+
+.proceed-btn:not(:disabled):hover {
+  background: #3460c0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .folder-manager {
+    padding: 12px;
+    gap: 12px;
+    max-height: 80vh;
+    max-width: 100%; /* Full width on mobile */
+    margin: 0;
+  }
+  
+  .folders-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .unorganized-grid {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    min-height: 60px;
+  }
+  
+  .folder-images {
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  }
+}

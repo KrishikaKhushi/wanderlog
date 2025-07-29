@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Vujahday+Script&display=swap');
+
+.country-page {
+  position: relative;
+  background-color: #000000;
+  color: white;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Custom Scrollbar Styles */
+.country-page::-webkit-scrollbar {
+  width: 6px;
+}
+
+.country-page::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.country-page::-webkit-scrollbar-thumb {
+  background: #666666;
+  border-radius: 3px;
+}
+
+.country-page::-webkit-scrollbar-thumb:hover {
+  background: #888888;
+}
+
+/* Apply scrollbar styles to any scrollable elements within */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #666666;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #888888;
+}
+
+/* Background image layer (behind lights) */
+/*.country-page::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  background-image: url('../assets/bg-image.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Corner light glow layer (above image but behind content) */
+.country-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(circle at top left, rgba(43, 80, 158, 0.3), transparent 40%),
+              radial-gradient(circle at top right, rgba(43, 80, 158, 0.25), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(43, 80, 158, 0.25), transparent 40%),
+              radial-gradient(circle at bottom right, rgba(43, 80, 158, 0.3), transparent 40%);
+}
+
+.country-header {
+  display: flex;
+  align-items: center;
+  justify-content: var(--header-justify, center);
+  gap: var(--header-gap, 2rem);
+  margin-top: var(--header-margin-top, 1rem);
+  margin-bottom: var(--header-margin-bottom, 2rem);
+  margin-left: var(--header-margin-left, auto);
+  margin-right: var(--header-margin-right, auto);
+  width: var(--header-width, 100%);
+  max-width: var(--header-max-width, 800px);
+  padding: var(--header-padding, 0);
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--back-button-color, rgb(43, 80, 158));
+  font-size: var(--back-button-size, 2rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+  order: var(--back-button-order, 0);
+}
+
+.back-button:hover {
+  color: var(--back-button-hover-color, #4173de);
+}
+
+.country-page h1 {
+  font-size: var(--page-title-size, 2.5rem);
+  color: var(--page-title-color, #2B509E);
+  margin: var(--page-title-margin, 0);
+  text-align: var(--page-title-align, center);
+  order: var(--page-title-order, 1);
+  flex: var(--page-title-flex, none);
+}
+
+/* Three Toggle Buttons */
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  border: 2px solid #8e8e8e;
+  border-radius: 25px;
+  overflow: hidden;
+  background-color: #222;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.toggle-buttons button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: #ececec;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.toggle-buttons button.active {
+  background-color: #606060;
+  color: #fff;
+}
+
+.toggle-buttons button:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Main Content */
+.main-content {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* Coming Soon Styles */
+.coming-soon {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.coming-soon h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.coming-soon p {
+  font-size: 1.2rem;
+  color: #cccccc;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .country-page {
+    padding: 1rem;
+  }
+
+  .country-page h1 {
+    font-size: 2rem;
+  }
+
+  .country-header {
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+  }
+
+  .toggle-buttons {
+    max-width: 100%;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+}

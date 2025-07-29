@@ -1,0 +1,102 @@
+.setting-item {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.setting-item label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+.setting-item small {
+  margin-top: 0.3rem;
+  color: #AAAAAA;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.setting-item input,
+.setting-item select,
+.setting-item textarea {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  font-size: 1rem;
+  background: #2c2c2c;
+  color: white;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.setting-item input:focus,
+.setting-item select:focus,
+.setting-item textarea:focus {
+  outline: none;
+  border-color: #2B509E;
+  box-shadow: 0 0 0 2px rgba(43, 80, 158, 0.2);
+}
+
+.setting-item input:disabled {
+  background: #1a1a1a;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.setting-item textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.setting-button {
+  background: linear-gradient(135deg, #2B509E, #6696ff);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 0.3rem;
+  width: fit-content;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.setting-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(43, 80, 158, 0.3);
+}
+
+.setting-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.setting-button.disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.update-button {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .setting-item label,
+  .setting-item small {
+    text-align: center;
+  }
+
+  .setting-button {
+    align-self: center;
+  }
+}

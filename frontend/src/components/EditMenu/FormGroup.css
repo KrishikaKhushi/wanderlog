@@ -1,0 +1,90 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+.form-group small {
+  margin-top: 0.3rem;
+  color: #AAAAAA;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.7rem;
+  border-radius: 8px;
+  background: #2c2c2c;
+  border: 1px solid #444;
+  color: white;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2B509E;
+  box-shadow: 0 0 0 2px rgba(43, 80, 158, 0.2);
+}
+
+.form-group input:disabled {
+  background: #1a1a1a;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.form-group textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* ===== ImageUploadField.css ===== */
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.file-upload-label {
+  background: linear-gradient(135deg, #2B509E, #6696ff);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  border: none;
+  font-size: 1rem;
+}
+
+.file-upload-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(43, 80, 158, 0.3);
+}
+
+.file-name {
+  color: #AAAAAA;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .file-upload-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

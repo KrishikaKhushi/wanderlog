@@ -1,0 +1,404 @@
+/* ========================================
+   PROFILE MENU COMPONENT
+   ======================================== */
+
+.profile-slideout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1a346cb8;
+  color: white;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.profile-slideout.open {
+  transform: translateX(0);
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  padding: 10px 0;
+  gap: 20px;
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.username {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 31px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-align: left;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  transition: color 0.3s ease;
+}
+
+.username:hover {
+  color: #0080ff;
+}
+
+.email {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  margin-bottom: 5px;
+  text-align: left;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+.edit-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  color: #0080ff;
+  padding: 5px 2px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  box-sizing: border-box;
+  max-width: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.edit-profile:hover {
+  background-color: rgba(0, 128, 255, 0.1);
+  border-color: rgba(0, 128, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.profile-options {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: -5px;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  margin-top: 1px;
+  box-sizing: border-box;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+}
+
+.option:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #0080ff, #00bfff);
+  border-radius: 0 2px 2px 0;
+}
+
+.option span {
+  transition: color 0.3s ease;
+}
+
+.option:hover span {
+  color: #ffffff;
+}
+
+.option img {
+  transition: transform 0.3s ease;
+}
+
+.option:hover img {
+  transform: scale(1.1);
+}
+
+.toggle-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 1px 0;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 5px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.toggle-option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.toggle-and-logout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.logout-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #ff2424;
+  cursor: pointer;
+  width: 100%;
+  margin-top: auto;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.logout-option:hover {
+  background-color: rgba(255, 36, 36, 0.1);
+  border-color: rgba(255, 36, 36, 0.3);
+  transform: translateX(4px);
+}
+
+.logout-option:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #ff2424, #ff6b6b);
+  border-radius: 0 2px 2px 0;
+}
+
+.logout-option img {
+  transition: transform 0.3s ease;
+}
+
+.logout-option:hover img {
+  transform: scale(1.1);
+}
+
+.profile-slideout img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   TOGGLE SWITCH
+   ======================================== */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.slider:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   LOGOUT CONFIRMATION
+   ======================================== */
+
+.logout-confirm {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  margin-top: 1rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logout-confirm button {
+  transition: all 0.3s ease;
+}
+
+.logout-confirm button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   SPECIAL EFFECTS FOR NEW OPTIONS
+   ======================================== */
+
+.option:nth-child(2) {
+  /* Social option - special styling */
+  position: relative;
+}
+
+.option:nth-child(2):hover {
+  background: linear-gradient(135deg, rgba(0, 128, 255, 0.1), rgba(0, 191, 255, 0.1));
+}
+
+.option:nth-child(3) {
+  /* My Friends option - special styling */
+  position: relative;
+}
+
+.option:nth-child(3):hover {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+}
+
+.option:nth-child(3):hover::before {
+  background: linear-gradient(180deg, #22c55e, #10b981);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .profile-slideout {
+    width: 280px;
+  }
+  
+  .option {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  
+  .username {
+    font-size: 22px;
+  }
+}
+
+.profile-slideout {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* ========================================
+   SMOOTH SCROLL
+   ======================================== */
+
+.profile-slideout::-webkit-scrollbar {
+  width: 4px;
+}
+
+.profile-slideout::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-slideout::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.profile-slideout::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}

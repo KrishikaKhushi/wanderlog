@@ -1,0 +1,70 @@
+/* src/components/DreamPinsDialog.css */
+
+.dream-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.dream-dialog {
+  background: #111;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 25px #ffffff;
+  position: relative;
+  text-align: center;
+}
+
+.dream-dialog h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.pin-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.pin-list li {
+  background: #1c1c1c;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #fdfdfd;
+  transition: background 0.3s ease;
+}
+
+.pin-list li:hover {
+  background: #2a2a2a;
+}
+
+.no-pins {
+  font-style: italic;
+  color: #aaa;
+  margin-top: 1rem;
+}

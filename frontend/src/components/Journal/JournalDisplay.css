@@ -1,0 +1,45 @@
+/* src/components/Journal/JournalDisplay.css */
+.journal-display {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.journal-scroll-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 1rem;
+  margin-bottom: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: #000000ba transparent;
+}
+
+.journal-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.journal-scroll-container::-webkit-scrollbar-thumb {
+  background: #7c5da6;
+  border-radius: 10px;
+}
+
+.edit-journal-button {
+  background: linear-gradient(135deg, #2B509E, #6696ff);
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: auto;
+  margin-bottom: 1rem;
+  align-self: center;
+}
+
+.edit-journal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(189, 155, 0, 0.3);
+}
