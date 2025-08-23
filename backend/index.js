@@ -7,9 +7,22 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ CORS Configuration
+// ✅ CORS Configuration - Updated for production
+const allowedOrigins = [
+  'http://localhost:3000', 
+  'http://localhost:5173', 
+  'http://localhost:5174',
+  // Add your Vercel domain here once deployed
+  // 'https://your-app-name.vercel.app'
+];
+
+// In production, allow all origins temporarily, then restrict to your Vercel domain
+if (process.env.NODE_ENV === 'production') {
+  allowedOrigins.push(process.env.FRONTEND_URL || '*');
+}
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'],
+  origin: process.env.NODE_ENV === 'production' ? allowedOrigins : true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -39,31 +52,35 @@ const authRoutes = require("./routes/auth");
 const pinRoutes = require("./routes/pins");
 const userRoutes = require("./routes/users");
 const messageRoutes = require("./routes/messages");
-const photoRoutes = require("./routes/photos"); // NEW: Photo routes
-const journalRoutes = require("./routes/journal"); // NEW: Journal routes
+const photoRoutes = require("./routes/photos");
+const journalRoutes = require("./routes/journal");
+const postsRoutes = require("./routes/posts");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/pins", pinRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
-app.use("/api/photos", photoRoutes); // NEW: Photo endpoints
-app.use("/api/journal", journalRoutes); // NEW: Journal endpoints
-app.use('/api/posts', require('./routes/posts'));
+app.use("/api/photos", photoRoutes);
+app.use("/api/journal", journalRoutes);
+app.use('/api/posts', postsRoutes);
 
 // ✅ Root Route
 app.get("/", (req, res) => {
   res.json({
     message: "🎒 WanderLog API Server",
-    version: "2.1.0", // Updated version
+    version: "2.1.0",
+    environment: process.env.NODE_ENV || 'development',
     endpoints: {
       auth: "/api/auth",
-      pins: "/api/pins",
+      pins: "/api/pins", 
       users: "/api/users",
       messages: "/api/messages",
-      photos: "/api/photos", // NEW: Photo endpoints
-      journal: "/api/journal" // NEW: Journal endpoints
+      photos: "/api/photos",
+      journal: "/api/journal",
+      posts: "/api/posts"
     },
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    status: "🚀 Server running successfully!"
   });
 });
 
@@ -73,7 +90,9 @@ app.get("/api/health", (req, res) => {
     status: "healthy",
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    database: mongoose.connection.readyState === 1 ? "connected" : "disconnected"
+    environment: process.env.NODE_ENV || 'development',
+    database: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    version: "2.1.0"
   });
 });
 
@@ -123,7 +142,7 @@ app.use("*", (req, res) => {
       "GET /api/messages/requests/:senderId",
       "POST /api/messages/requests/:senderId/accept",
       "POST /api/messages/requests/:senderId/decline",
-      // NEW: Photo routes
+      // Photo routes
       "GET /api/photos/country/:countryCode",
       "GET /api/photos/country/:countryCode/public",
       "POST /api/photos/upload",
@@ -132,7 +151,7 @@ app.use("*", (req, res) => {
       "DELETE /api/photos/:photoId",
       "POST /api/photos/:photoId/like",
       "GET /api/photos/user/stats",
-      // NEW: Journal routes
+      // Journal routes
       "GET /api/journal/country/:countryCode",
       "GET /api/journal/country/:countryCode/public",
       "POST /api/journal",
@@ -189,21 +208,48 @@ mongoose
   .then(() => {
     console.log("✅ Connected to MongoDB");
     console.log("📊 Database:", mongoose.connection.db.databaseName);
+    console.log("🌍 Environment:", process.env.NODE_ENV || 'development');
   })
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err);
     process.exit(1);
   });
 
+// ✅ Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('\n🛑 Received SIGINT. Gracefully shutting down...');
+  try {
+    await mongoose.connection.close();
+    console.log('✅ MongoDB connection closed.');
+    process.exit(0);
+  } catch (error) {
+    console.error('❌ Error during shutdown:', error);
+    process.exit(1);
+  }
+});
+
 // ✅ Server Startup
-app.listen(PORT, () => {
-  console.log(`🚀 WanderLog API Server running on http://localhost:${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 WanderLog API Server running on port ${PORT}`);
   console.log(`🔐 Authentication: http://localhost:${PORT}/api/auth`);
   console.log(`📍 Pins API: http://localhost:${PORT}/api/pins`);
   console.log(`👥 Users API: http://localhost:${PORT}/api/users`);
   console.log(`💬 Messages API: http://localhost:${PORT}/api/messages`);
-  console.log(`📸 Photos API: http://localhost:${PORT}/api/photos`); // NEW
-  console.log(`📖 Journal API: http://localhost:${PORT}/api/journal`); // NEW
+  console.log(`📸 Photos API: http://localhost:${PORT}/api/photos`);
+  console.log(`📖 Journal API: http://localhost:${PORT}/api/journal`);
+  console.log(`📝 Posts API: http://localhost:${PORT}/api/posts`);
   console.log(`❤️ Health Check: http://localhost:${PORT}/api/health`);
   console.log(`📚 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
+// Handle server errors
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`❌ Port ${PORT} is already in use`);
+    process.exit(1);
+  } else {
+    console.error('❌ Server error:', error);
+  }
+});
+
+module.exports = app;

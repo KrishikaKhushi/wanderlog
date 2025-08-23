@@ -1,15 +1,20 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
+  "name": "wanderlog-backend",
+  "version": "2.1.0",
+  "description": "WanderLog API Server - Travel journaling and photo sharing platform",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["travel", "journaling", "photos", "wanderlog", "api"],
+  "author": "KrishikaKhushi",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
