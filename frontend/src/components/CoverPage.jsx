@@ -14,22 +14,6 @@ export default function CoverPage({ showLogin, setShowLogin }) {
     console.log('✅ Login successful, redirecting to main app...');
   };
 
-  const handleDemoLogin = async () => {
-    setLoading(true);
-    try {
-      // Demo credentials - you can create a demo user in your database
-      const result = await login('demo@wanderbook.com', 'demo123');
-      if (!result.success) {
-        alert('Demo login failed. Please use the regular login or create an account.');
-      }
-    } catch (error) {
-      console.error('Demo login error:', error);
-      alert('Demo login is not available right now. Please create an account or login.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div
       style={{
@@ -103,7 +87,7 @@ export default function CoverPage({ showLogin, setShowLogin }) {
           Your Travel Scrapbook
         </p>
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <div style={{
           display: 'flex',
           gap: '1rem',
@@ -128,39 +112,6 @@ export default function CoverPage({ showLogin, setShowLogin }) {
             onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
           >
             Login / Sign Up
-          </button>
-
-          <button
-            onClick={handleDemoLogin}
-            disabled={loading}
-            style={{
-              padding: '1rem 2rem',
-              background: 'transparent',
-              color: 'white',
-              borderRadius: '0.5rem',
-              fontWeight: 'bold',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              border: '2px solid rgba(255,255,255,0.7)',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
-              transition: 'all 0.2s ease',
-              fontSize: '1.1rem',
-              opacity: loading ? 0.6 : 1,
-              backdropFilter: 'blur(10px)',
-            }}
-            onMouseOver={(e) => {
-              if (!loading) {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-              }
-            }}
-            onMouseOut={(e) => {
-              if (!loading) {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.background = 'transparent';
-              }
-            }}
-          >
-            {loading ? 'Loading...' : 'Try Demo'}
           </button>
         </div>
 
