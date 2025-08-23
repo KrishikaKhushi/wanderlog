@@ -48,6 +48,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/photos", photoRoutes); // NEW: Photo endpoints
 app.use("/api/journal", journalRoutes); // NEW: Journal endpoints
+app.use('/api/posts', require('./routes/posts'));
 
 // ✅ Root Route
 app.get("/", (req, res) => {

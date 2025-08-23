@@ -1,6 +1,75 @@
 // src/services/countryApi.js
 import API from '../api';
 
+// Post API calls
+export const postApi = {
+  // Get posts for a specific country
+  getPostsForCountry: async (countryCode) => {
+    try {
+      const response = await API.get(`/posts/country/${countryCode}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      throw error;
+    }
+  },
+
+  // Create post with existing photos
+  createPost: async (postData) => {
+    try {
+      const response = await API.post('/posts/create', postData);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating post:', error);
+      throw error;
+    }
+  },
+
+  // Create post with photo upload in one go
+  createPostWithUpload: async (postData) => {
+    try {
+      const response = await API.post('/posts/create-with-upload', postData);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating post with upload:', error);
+      throw error;
+    }
+  },
+
+  // Update post
+  updatePost: async (postId, updates) => {
+    try {
+      const response = await API.put(`/posts/${postId}`, updates);
+      return response.data;
+    } catch (error) {
+      console.error('Error updating post:', error);
+      throw error;
+    }
+  },
+
+  // Delete post
+  deletePost: async (postId) => {
+    try {
+      const response = await API.delete(`/posts/${postId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      throw error;
+    }
+  },
+
+  // Like/unlike post
+  togglePostLike: async (postId) => {
+    try {
+      const response = await API.post(`/posts/${postId}/like`);
+      return response.data;
+    } catch (error) {
+      console.error('Error toggling post like:', error);
+      throw error;
+    }
+  }
+};
+
 // Photo API calls
 export const photoApi = {
   // Get photos for a specific country
@@ -14,7 +83,7 @@ export const photoApi = {
     }
   },
 
-  // Upload photos as base64
+  // Upload photos as base64 (for individual photos)
   uploadPhotosBase64: async (photos, country, countryCode) => {
     try {
       const response = await API.post('/photos/upload-base64', {
@@ -263,22 +332,62 @@ export const countryApi = {
     }
   },
 
-  // Get comprehensive country data (pins + photos + journal)
+  // Get comprehensive country data (pins + posts + photos + journal)
   getCountryData: async (countryCode) => {
     try {
-      const [pinResponse, photosResponse, journalResponse] = await Promise.all([
+      const [pinResponse, postsResponse, photosResponse, journalResponse] = await Promise.all([
         countryApi.getCountryPin(countryCode),
+        postApi.getPostsForCountry(countryCode),
         photoApi.getPhotosForCountry(countryCode),
         journalApi.getEntriesForCountry(countryCode)
       ]);
+
+      // Convert posts to display format
+      const displayPosts = postsResponse.posts?.map(post => ({
+        id: post._id,
+        title: post.title,
+        description: post.description,
+        images: post.photos.map(photo => ({
+          id: photo._id,
+          url: photo.url,
+          caption: photo.caption,
+          tags: photo.tags,
+          uploadedAt: photo.uploadedAt,
+          isPublic: photo.isPublic,
+          likes: photo.likes || [],
+          views: photo.views || 0
+        })),
+        tags: post.tags,
+        isPublic: post.isPublic,
+        likes: post.likes || [],
+        comments: post.comments || [],
+        views: post.views || 0,
+        createdAt: post.createdAt,
+        photoCount: post.photos.length
+      })) || [];
+
+      // Get photo IDs that are already in posts
+      const photoIdsInPosts = new Set();
+      displayPosts.forEach(post => {
+        post.images.forEach(photo => {
+          photoIdsInPosts.add(photo.id);
+        });
+      });
+
+      // Filter out photos that are already in posts (to avoid duplicates)
+      const individualPhotos = photosResponse.photos?.filter(photo => 
+        !photoIdsInPosts.has(photo._id)
+      ) || [];
 
       return {
         success: true,
         data: {
           pin: pinResponse.pin,
-          photos: photosResponse.photos || [],
+          posts: displayPosts,
+          photos: individualPhotos, // Only photos not in posts
           journal: journalResponse.entries || [],
           stats: {
+            postCount: displayPosts.length,
             photoCount: photosResponse.total || 0,
             journalCount: journalResponse.total || 0
           }
@@ -398,6 +507,7 @@ export const utils = {
 
 // Export everything as default
 export default {
+  postApi,
   photoApi,
   journalApi,
   countryApi,

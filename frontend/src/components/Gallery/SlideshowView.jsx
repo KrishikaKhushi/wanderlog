@@ -114,18 +114,67 @@ const SlideshowView = ({ photos, currentSlide, setCurrentSlide }) => {
     }
   };
 
+  // Early return if no photos
+  if (!photos || photos.length === 0) {
+    return (
+      <div className="slideshow-wrapper">
+        <div className="slideshow-container">
+          <div className="no-photos-message">
+            <p>No photos to display</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const currentPhoto = photos[currentSlide];
+
   return (
     <div className="slideshow-wrapper">
       <div className="slideshow-container">
         <img
           ref={imageRef}
-          src={photos[currentSlide]}
-          alt={`slide-${currentSlide}`}
+          src={currentPhoto?.url} // FIXED: Use currentPhoto.url instead of photos[currentSlide]
+          alt={currentPhoto?.caption || `slide-${currentSlide}`}
           className="slideshow-image"
           onClick={resetInactivityTimer}
           onDoubleClick={toggleFullscreen}
           tabIndex={0}
         />
+        
+        {/* Navigation arrows */}
+        {photos.length > 1 && (
+          <>
+            <button 
+              className="slideshow-nav prev" 
+              onClick={prevSlide}
+              aria-label="Previous photo"
+            >
+              ❮
+            </button>
+            <button 
+              className="slideshow-nav next" 
+              onClick={nextSlide}
+              aria-label="Next photo"
+            >
+              ❯
+            </button>
+          </>
+        )}
+
+        {/* Photo counter */}
+        {photos.length > 1 && (
+          <div className="slideshow-counter">
+            {currentSlide + 1} / {photos.length}
+          </div>
+        )}
+
+        {/* Auto-play indicator */}
+        {autoPlay && (
+          <div className="autoplay-indicator">
+            ▶️ Auto-play
+          </div>
+        )}
       </div>
     </div>
   );

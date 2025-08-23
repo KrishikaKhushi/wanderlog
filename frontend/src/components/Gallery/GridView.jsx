@@ -86,8 +86,8 @@ const GridView = ({ photos, onPhotoClick, posts = [], onShare }) => {
                 onClick={() => onPhotoClick(post, 0)} // Pass the entire post object
               >
                 <img
-                  src={post.images[0]} // Show first image as thumbnail
-                  alt={`${post.folderName || 'Post'} thumbnail`}
+                  src={post.images[0]?.url || post.images[0]} // FIXED: Use post.images[0].url for post thumbnails
+                  alt={`${post.title || post.folderName || 'Post'} thumbnail`}
                   className="instagram-thumb"
                 />
                 {post.images.length > 1 && (
@@ -95,8 +95,8 @@ const GridView = ({ photos, onPhotoClick, posts = [], onShare }) => {
                 )}
                 <div className="post-overlay">
                   <div className="post-stats">
-                    <span>❤️ {post.likes || Math.floor(Math.random() * 50)}</span>
-                    <span>💬 {post.comments || Math.floor(Math.random() * 20)}</span>
+                    <span>❤️ {post.likes?.length || 0}</span>
+                    <span>💬 {post.comments?.length || 0}</span>
                   </div>
                 </div>
               </div>
@@ -106,7 +106,7 @@ const GridView = ({ photos, onPhotoClick, posts = [], onShare }) => {
             const isSelected = selectedImages.includes(photo);
             return (
               <div 
-                key={`photo-${gridIndex}`} 
+                key={`photo-${photo.id || gridIndex}`} 
                 className={`instagram-post-preview ${isSelected ? 'selected' : ''}`}
                 onClick={() => handleImageSelect(photo, item.index)}
                 onMouseDown={(e) => {
@@ -119,8 +119,8 @@ const GridView = ({ photos, onPhotoClick, posts = [], onShare }) => {
                 }}
               >
                 <img
-                  src={photo}
-                  alt={`photo-${gridIndex}`}
+                  src={photo.url} // FIXED: Use photo.url instead of photo
+                  alt={photo.caption || `photo-${gridIndex}`}
                   className="instagram-thumb"
                 />
                 {selectionMode && (
@@ -130,8 +130,8 @@ const GridView = ({ photos, onPhotoClick, posts = [], onShare }) => {
                 )}
                 <div className="post-overlay">
                   <div className="post-stats">
-                    <span>❤️ {Math.floor(Math.random() * 50)}</span>
-                    <span>💬 {Math.floor(Math.random() * 20)}</span>
+                    <span>❤️ {photo.likes?.length || 0}</span>
+                    <span>👁️ {photo.views || 0}</span>
                   </div>
                 </div>
               </div>

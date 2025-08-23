@@ -84,12 +84,16 @@
   background: linear-gradient(135deg, #2B509E, #6696ff);
   color: white;
   border: none;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   border-radius: 25px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+  white-space: nowrap;
+  min-width: 200px;
 }
 
 .explore-button:hover {
@@ -109,7 +113,8 @@
   }
 
   .explore-button {
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 2rem;
     font-size: 0.9rem;
+    min-width: 180px;
   }
 }

@@ -6,18 +6,18 @@ import PostModal from "./Gallery/PostModal";
 import ActionButtons from "./Gallery/ActionButtons";
 import "./GallerySection.css";
 
-const GallerySection = ({ photos, galleryView, setGalleryView, onPhotoUpload, countryName }) => {
+const GallerySection = ({ photos, posts = [], galleryView, setGalleryView, onPhotoUpload, onPhotoRefresh, countryName }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [showPostView, setShowPostView] = useState(false);
-  const [posts, setPosts] = useState([]); // Store shared posts
   const [allPhotos, setAllPhotos] = useState(photos); // Track all photos including uploaded ones
+  const [allPosts, setAllPosts] = useState(posts); // Track all posts
 
-  // Set default view to slideshow
+  // Set default view to grid (as requested)
   useEffect(() => {
     if (!galleryView || galleryView === "tile") {
-      setGalleryView("slideshow");
+      setGalleryView("grid");
     }
   }, [galleryView, setGalleryView]);
 
@@ -30,8 +30,13 @@ const GallerySection = ({ photos, galleryView, setGalleryView, onPhotoUpload, co
     setAllPhotos(photos);
   }, [photos]);
 
+  // Update allPosts when posts prop changes
+  useEffect(() => {
+    setAllPosts(posts);
+  }, [posts]);
+
   const toggleView = () => {
-    const views = ["slideshow", "album"];
+    const views = ["slideshow", "grid"];
     const currentIndex = views.indexOf(galleryView);
     const nextIndex = (currentIndex + 1) % views.length;
     setGalleryView(views[nextIndex]);
@@ -63,39 +68,17 @@ const GallerySection = ({ photos, galleryView, setGalleryView, onPhotoUpload, co
     }
   };
 
-  const handlePostsCreated = (posts, backendPhotos) => {
-    if (onPostsCreated) {
-      onPostsCreated(posts);
-    }
+  // FIXED: Handle posts created from UploadOrganizer
+  const handlePostsCreated = (createdPosts) => {
+    console.log('📝 Posts created:', createdPosts);
     
-    // If we have backend photos, add them to the photo state
-    if (backendPhotos && backendPhotos.length > 0) {
-      const newPhotos = backendPhotos.map(photo => ({
-        id: photo._id,
-        url: photo.url,
-        caption: photo.caption,
-        tags: photo.tags,
-        uploadedAt: photo.uploadedAt,
-        isPublic: photo.isPublic,
-        likes: photo.likes || [],
-        views: photo.views || 0
-      }));
-      
-      // Update the photos state by calling the parent's photo update function
-      if (onPhotoUpload) {
-        // Create a fake event to trigger the photo update
-        const fakeEvent = {
-          target: {
-            files: [] // Empty since we're passing the processed photos directly
-          },
-          backendPhotos: newPhotos // Pass the processed photos
-        };
-        onPhotoUpload(fakeEvent);
-      }
-    }
+    // Add the new posts to our local state
+    setAllPosts(prev => [...createdPosts, ...prev]);
     
-    setSelectedFiles([]);
-    setShowUploadOrganizer(false);
+    // Refresh the country data to get the latest from backend
+    if (onPhotoRefresh) {
+      onPhotoRefresh();
+    }
   };
 
   return (
@@ -105,20 +88,20 @@ const GallerySection = ({ photos, galleryView, setGalleryView, onPhotoUpload, co
       </div>
 
       <div className={`photo-preview ${galleryView}`}>
-        {allPhotos.length === 0 ? (
+        {allPhotos.length === 0 && allPosts.length === 0 ? (
           <div className="no-photos-message">
             <p>No photos uploaded yet. Use the + button to get started!</p>
           </div>
         ) : galleryView === "slideshow" ? (
           <SlideshowView 
-            photos={allPhotos}
+            photos={[...allPosts.flatMap(post => post.images), ...allPhotos]}
             currentSlide={currentSlide}
             setCurrentSlide={setCurrentSlide}
           />
         ) : (
           <GridView 
             photos={allPhotos}
-            posts={posts}
+            posts={allPosts}
             onPhotoClick={openPostView}
           />
         )}
@@ -128,8 +111,8 @@ const GallerySection = ({ photos, galleryView, setGalleryView, onPhotoUpload, co
         galleryView={galleryView}
         onToggleView={toggleView}
         onFileUpload={handleFileUpload}
-        onPostsCreated={handlePostsCreated}
-        countryName={countryName} // ADD THIS LINE
+        onPostsCreated={handlePostsCreated} // FIXED: Now properly defined
+        countryName={countryName}
       />
 
       {showPostView && selectedImage && (

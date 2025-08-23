@@ -1,5 +1,5 @@
 /* ========================================
-   PROFILE MENU COMPONENT
+   PROFILE MENU COMPONENT - FIXED WITH UNIQUE NAMES
    ======================================== */
 
 .profile-slideout {
@@ -24,65 +24,66 @@
   transform: translateX(0);
 }
 
-.profile-content {
+.profile-menu-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: left; /* Changed to flex-start for proper left alignment */
   height: 100%;
   padding: 10px 0;
-  gap: 20px;
+  gap: 0; /* Fixed gap */
   flex: 1;
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
 }
 
-.profile-header {
+.profile-menu-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-start; /* Ensured left alignment */
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 20px; /* Added proper spacing */
 }
 
-.username {
+.profile-menu-username {
   width: 100%;
   font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 31px;
+  font-weight: 600; /* Increased font weight */
+  font-size: 32px; /* Increased from 28px */
+  line-height: 1.2; /* Better line height */
   color: #ffffff;
-  margin-bottom: 10px;
-  text-align: left;
+  margin-bottom: 12px; /* Increased margin */
+  text-align: left !important; /* Force left alignment */
   box-sizing: border-box;
   word-wrap: break-word;
   transition: color 0.3s ease;
 }
 
-.username:hover {
+.profile-menu-username:hover {
   color: #0080ff;
 }
 
-.email {
+.profile-menu-email {
   width: 100%;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #ffffff;
-  margin-bottom: 5px;
-  text-align: left;
+  font-size: 16px; /* Slightly increased */
+  line-height: 1.3;
+  color: #cccccc; /* Slightly lighter for better contrast */
+  margin-bottom: 15px; /* Increased margin */
+  text-align: left !important; /* Force left alignment */
   box-sizing: border-box;
   word-wrap: break-word;
 }
 
-.edit-profile {
+.profile-menu-edit-profile {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
+  justify-content: flex-start !important; /* Force left alignment */
+  gap: 8px; /* Increased gap */
   color: #0080ff;
-  padding: 5px 2px;
+  padding: 8px 4px; /* Increased padding */
   font-size: 16px;
   font-family: 'Inter', sans-serif;
   border-radius: 6px;
@@ -91,52 +92,55 @@
   max-width: 100%;
   transition: all 0.3s ease;
   border: 1px solid transparent;
+  text-align: left !important; /* Force left alignment */
+  align-self: flex-start; /* Ensure it aligns to the left */
 }
 
-.edit-profile:hover {
+.profile-menu-edit-profile:hover {
   background-color: rgba(0, 128, 255, 0.1);
   border-color: rgba(0, 128, 255, 0.3);
   transform: translateX(4px);
 }
 
-.profile-options {
+.profile-menu-options {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: -5px;
+  gap: -5px; /* Fixed gap */
   width: 100%;
   flex: 1;
   overflow: hidden;
-  margin-top: 1px;
+  margin-top: -4px;
   box-sizing: border-box;
 }
 
-.option {
+.profile-menu-option {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
+  justify-content: flex-start !important; /* Force left alignment */
+  gap: 12px; /* Increased gap */
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   cursor: pointer;
   width: 100%;
   box-sizing: border-box;
   min-width: 0;
-  padding: 10px 12px;
+  padding: 8px 14px; /* Increased padding */
   border-radius: 6px;
   transition: all 0.3s ease;
   border: 1px solid transparent;
   position: relative;
+  text-align: left !important; /* Force left alignment */
 }
 
-.option:hover {
+.profile-menu-option:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateX(4px);
 }
 
-.option:hover::before {
+.profile-menu-option:hover::before {
   content: '';
   position: absolute;
   left: 0;
@@ -147,57 +151,60 @@
   border-radius: 0 2px 2px 0;
 }
 
-.option span {
+.profile-menu-option span {
   transition: color 0.3s ease;
+  text-align: left;
 }
 
-.option:hover span {
+.profile-menu-option:hover span {
   color: #ffffff;
 }
 
-.option img {
+.profile-menu-option img {
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
-.option:hover img {
+.profile-menu-option:hover img {
   transform: scale(1.1);
 }
 
-.toggle-option {
+.profile-menu-toggle-option {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  margin: 1px 0;
+  justify-content: flex-start !important; /* Force left alignment */
+  gap: 10px; /* Increased gap */
+  margin: 5px 0;
   color: #ffffff;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   width: 100%;
   box-sizing: border-box;
   min-width: 0;
-  padding: 5px 12px;
+  padding: 2px 4px; /* Increased padding */
   border-radius: 6px;
   transition: all 0.3s ease;
+  text-align: left !important; /* Force left alignment */
 }
 
-.toggle-option:hover {
+.profile-menu-toggle-option:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.toggle-and-logout {
+.profile-menu-toggle-and-logout {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px; /* Increased gap */
   width: 100%;
   margin-top: 20px;
   box-sizing: border-box;
 }
 
-.logout-option {
+.profile-menu-logout-option {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
+  justify-content: flex-start !important; /* Force left alignment */
+  gap: 14px; /* Increased gap */
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   color: #ff2424;
@@ -206,20 +213,21 @@
   margin-top: auto;
   box-sizing: border-box;
   min-width: 0;
-  padding: 10px 12px;
+  padding: 12px 70px; /* Increased padding */
   border-radius: 6px;
   transition: all 0.3s ease;
   border: 1px solid transparent;
   position: relative;
+  text-align: left !important; /* Force left alignment */
 }
 
-.logout-option:hover {
+.profile-menu-logout-option:hover {
   background-color: rgba(255, 36, 36, 0.1);
   border-color: rgba(255, 36, 36, 0.3);
   transform: translateX(4px);
 }
 
-.logout-option:hover::before {
+.profile-menu-logout-option:hover::before {
   content: '';
   position: absolute;
   left: 0;
@@ -230,17 +238,17 @@
   border-radius: 0 2px 2px 0;
 }
 
-.logout-option img {
+.profile-menu-logout-option img {
   transition: transform 0.3s ease;
 }
 
-.logout-option:hover img {
+.profile-menu-logout-option:hover img {
   transform: scale(1.1);
 }
 
 .profile-slideout img {
-  width: 20px;
-  height: 20px;
+  width: 22px; /* Slightly increased */
+  height: 22px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -249,7 +257,7 @@
    TOGGLE SWITCH
    ======================================== */
 
-.switch {
+.profile-menu-switch {
   position: relative;
   display: inline-block;
   width: 42px;
@@ -257,13 +265,13 @@
   flex-shrink: 0;
 }
 
-.switch input {
+.profile-menu-switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.profile-menu-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -275,7 +283,7 @@
   border-radius: 22px;
 }
 
-.slider:before {
+.profile-menu-slider:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -287,15 +295,15 @@
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked + .profile-menu-slider {
   background-color: #2196f3;
 }
 
-input:checked + .slider:before {
+input:checked + .profile-menu-slider:before {
   transform: translateX(20px);
 }
 
-.slider:hover {
+.profile-menu-slider:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -303,7 +311,7 @@ input:checked + .slider:before {
    LOGOUT CONFIRMATION
    ======================================== */
 
-.logout-confirm {
+.profile-menu-logout-confirm {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -323,11 +331,11 @@ input:checked + .slider:before {
   }
 }
 
-.logout-confirm button {
+.profile-menu-logout-confirm button {
   transition: all 0.3s ease;
 }
 
-.logout-confirm button:hover {
+.profile-menu-logout-confirm button:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -336,25 +344,25 @@ input:checked + .slider:before {
    SPECIAL EFFECTS FOR NEW OPTIONS
    ======================================== */
 
-.option:nth-child(2) {
+.profile-menu-option:nth-child(2) {
   /* Social option - special styling */
   position: relative;
 }
 
-.option:nth-child(2):hover {
+.profile-menu-option:nth-child(2):hover {
   background: linear-gradient(135deg, rgba(0, 128, 255, 0.1), rgba(0, 191, 255, 0.1));
 }
 
-.option:nth-child(3) {
+.profile-menu-option:nth-child(3) {
   /* My Friends option - special styling */
   position: relative;
 }
 
-.option:nth-child(3):hover {
+.profile-menu-option:nth-child(3):hover {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
 }
 
-.option:nth-child(3):hover::before {
+.profile-menu-option:nth-child(3):hover::before {
   background: linear-gradient(180deg, #22c55e, #10b981);
 }
 
@@ -367,13 +375,13 @@ input:checked + .slider:before {
     width: 280px;
   }
   
-  .option {
-    padding: 8px 10px;
+  .profile-menu-option {
+    padding: 10px 12px;
     font-size: 14px;
   }
   
-  .username {
-    font-size: 22px;
+  .profile-menu-username {
+    font-size: 26px; /* Adjusted for mobile */
   }
 }
 
@@ -401,4 +409,10 @@ input:checked + .slider:before {
 
 .profile-slideout::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+.profile-menu-footer {
+  align-self: center;
+  width: 100%;
+  text-align: center;
 }

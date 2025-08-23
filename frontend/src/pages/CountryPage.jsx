@@ -22,7 +22,8 @@ const CountryPage = () => {
   
   // Photo State
   const [photos, setPhotos] = useState([]);
-  const [galleryView, setGalleryView] = useState("slideshow");
+  const [galleryView, setGalleryView] = useState("grid");
+  const [posts, setPosts] = useState([]);
   
   // Country Data State
   const [countryData, setCountryData] = useState({
@@ -38,66 +39,70 @@ const CountryPage = () => {
   }, [countryCode]);
 
   const loadCountryData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  try {
+    setLoading(true);
+    setError(null);
+    
+    console.log('📍 Loading country data for:', countryName);
+    
+    // Get country code for API calls
+    const apiCountryCode = utils.getCountryCode(countryName);
+    
+    // Load comprehensive country data (now includes posts)
+    const response = await countryApi.getCountryData(apiCountryCode);
+    
+    if (response.success) {
+      const { pin, posts: loadedPosts, photos: loadedPhotos, journal: loadedEntries, stats } = response.data;
       
-      console.log('📍 Loading country data for:', countryName);
+      // Set country data
+      setCountryData({ pin, stats });
       
-      // Get country code for API calls
-      const apiCountryCode = utils.getCountryCode(countryName);
+      // Set posts (these are grouped photos)
+      setPosts(loadedPosts || []);
       
-      // Load comprehensive country data
-      const response = await countryApi.getCountryData(apiCountryCode);
+      // Convert individual photos for display (photos not in posts)
+      const displayPhotos = loadedPhotos.map(photo => ({
+        id: photo._id,
+        url: photo.url,
+        caption: photo.caption,
+        tags: photo.tags,
+        uploadedAt: photo.uploadedAt,
+        isPublic: photo.isPublic,
+        likes: photo.likes || [],
+        views: photo.views || 0
+      }));
+      setPhotos(displayPhotos);
       
-      if (response.success) {
-        const { pin, photos: loadedPhotos, journal: loadedEntries, stats } = response.data;
-        
-        // Set country data
-        setCountryData({ pin, stats });
-        
-        // Convert photos for display
-        const displayPhotos = loadedPhotos.map(photo => ({
-          id: photo._id,
-          url: photo.url,
-          caption: photo.caption,
-          tags: photo.tags,
-          uploadedAt: photo.uploadedAt,
-          isPublic: photo.isPublic,
-          likes: photo.likes || [],
-          views: photo.views || 0
-        }));
-        setPhotos(displayPhotos);
-        
-        // Convert journal entries for display
-        const displayEntries = loadedEntries.map(journalEntry => ({
-          id: journalEntry._id,
-          text: journalEntry.content,
-          title: journalEntry.title,
-          date: journalEntry.createdAt,
-          mood: journalEntry.mood,
-          weather: journalEntry.weather,
-          tags: journalEntry.tags,
-          isPublic: journalEntry.isPublic,
-          isFavorite: journalEntry.isFavorite,
-          likes: journalEntry.likes || [],
-          wordCount: journalEntry.wordCount,
-          readingTime: journalEntry.readingTime
-        }));
-        setEntries(displayEntries);
-        
-        console.log('✅ Country data loaded successfully:', {
-          photos: displayPhotos.length,
-          entries: displayEntries.length
-        });
-      }
-    } catch (error) {
-      console.error('❌ Error loading country data:', error);
-      setError('Failed to load country data. Please try again.');
-    } finally {
-      setLoading(false);
+      // Convert journal entries for display
+      const displayEntries = loadedEntries.map(journalEntry => ({
+        id: journalEntry._id,
+        text: journalEntry.content,
+        title: journalEntry.title,
+        date: journalEntry.createdAt,
+        mood: journalEntry.mood,
+        weather: journalEntry.weather,
+        tags: journalEntry.tags,
+        isPublic: journalEntry.isPublic,
+        isFavorite: journalEntry.isFavorite,
+        likes: journalEntry.likes || [],
+        wordCount: journalEntry.wordCount,
+        readingTime: journalEntry.readingTime
+      }));
+      setEntries(displayEntries);
+      
+      console.log('✅ Country data loaded successfully:', {
+        posts: loadedPosts?.length || 0,
+        photos: displayPhotos.length,
+        entries: displayEntries.length
+      });
     }
-  };
+  } catch (error) {
+    console.error('❌ Error loading country data:', error);
+    setError('Failed to load country data. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleNavigateBack = () => {
     navigate("/");
@@ -454,7 +459,8 @@ const CountryPage = () => {
       <div className="main-content">
         {activeTab === "gallery" && (
           <GallerySection
-            photos={photos}
+            photos={[]}
+            posts={posts} 
             galleryView={galleryView}
             setGalleryView={setGalleryView}
             onPhotoUpload={handlePhotoUpload}

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import FolderManager from "./FolderManager";
 import PostCreator from "./PostCreator";
-import { photoApi, utils } from "../../services/countryApi";
+import { postApi, utils } from "../../services/countryApi"; // Changed: Import postApi instead of photoApi
 import "./UploadOrganizer.css";
 
 const UploadOrganizer = ({ selectedFiles, onClose, onPost, countryName }) => {
@@ -95,7 +95,7 @@ const UploadOrganizer = ({ selectedFiles, onClose, onPost, countryName }) => {
         filename: filename,
         caption: '',
         tags: [],
-        isPublic: false
+        isPhotoPublic: false
       };
     });
   };
@@ -110,92 +110,109 @@ const UploadOrganizer = ({ selectedFiles, onClose, onPost, countryName }) => {
     setIsUploading(true);
     
     try {
-      console.log('📸 Starting backend upload process for country:', countryName);
+      console.log('📝 Starting post creation process for country:', countryName);
       
-      // Get all unique images from all folders
-      const allImages = [...new Set(folders.flatMap(folder => folder.images))];
-      console.log('📸 Total unique images to upload:', allImages.length);
+      const apiCountryCode = utils.getCountryCode(countryName);
+      const createdPosts = [];
       
-      if (allImages.length === 0) {
-        console.log('📸 No images to upload');
-        onPost([]);
-        onClose();
-        return;
+      // Create a post for each non-empty folder
+      for (const folder of folders) {
+        if (folder.images.length === 0) continue;
+        
+        console.log(`📝 Creating post "${folder.name}" with ${folder.images.length} photos`);
+        
+        // Prepare photos for this post
+        const photosForUpload = preparePhotosForUpload(folder.images);
+        
+        // Create post with upload using the new API
+        const postData = {
+          photos: photosForUpload,
+          country: countryName,
+          countryCode: apiCountryCode,
+          title: folder.name || '',
+          description: folder.caption || '',
+          tags: folder.taggedPeople || [],
+          isPublic: !folder.hideFromFeed
+        };
+        
+        try {
+          const response = await postApi.createPostWithUpload(postData);
+          
+          if (response.success) {
+            console.log(`✅ Post "${folder.name}" created successfully`);
+            
+            // Convert the backend post to display format
+            const displayPost = {
+              id: response.post._id,
+              title: response.post.title,
+              description: response.post.description,
+              images: response.post.photos.map(photo => ({
+                id: photo._id,
+                url: photo.url,
+                caption: photo.caption,
+                tags: photo.tags,
+                uploadedAt: photo.uploadedAt,
+                isPublic: photo.isPublic,
+                likes: photo.likes || [],
+                views: photo.views || 0
+              })),
+              tags: response.post.tags,
+              isPublic: response.post.isPublic,
+              likes: response.post.likes || [],
+              comments: response.post.comments || [],
+              views: response.post.views || 0,
+              createdAt: response.post.createdAt,
+              photoCount: response.post.photos.length,
+              folderName: folder.name
+            };
+            
+            createdPosts.push(displayPost);
+            
+          } else {
+            console.error(`❌ Failed to create post "${folder.name}":`, response.message);
+          }
+          
+        } catch (postError) {
+          console.error(`❌ Error creating post "${folder.name}":`, postError);
+        }
       }
       
-      // Prepare photos for backend upload
-      const photosForUpload = preparePhotosForUpload(allImages);
-      const apiCountryCode = utils.getCountryCode(countryName);
-      
-      console.log('📸 Country code:', apiCountryCode);
-      console.log('📸 Photos prepared for upload:', photosForUpload.length);
-      
-      // Upload all photos to backend
-      const response = await photoApi.uploadPhotosBase64(photosForUpload, countryName, apiCountryCode);
-      
-      if (response.success) {
-        console.log('✅ Photos uploaded to backend successfully:', response.photos.length);
+      if (createdPosts.length > 0) {
+        console.log(`✅ Successfully created ${createdPosts.length} posts`);
         
-        // Create a mapping from base64 URLs to backend photo URLs
-        const urlMapping = {};
-        response.photos.forEach((photo, index) => {
-          if (allImages[index]) {
-            urlMapping[allImages[index]] = photo.url;
-          }
-        });
-        
-        // Convert folders to posts with backend photo URLs
-        const posts = folders.map((folder, index) => ({
-          id: Date.now() + Math.random() + index,
-          images: folder.images.map(img => urlMapping[img] || img), // Use backend URLs
-          caption: folder.caption || "",
-          taggedPeople: folder.taggedPeople || [],
-          location: folder.location || "",
-          hideFromFeed: folder.hideFromFeed || false,
-          turnOffComments: folder.turnOffComments || false,
-          likes: 0, // Start with 0 likes
-          comments: 0, // Start with 0 comments
-          timestamp: new Date(),
-          folderName: folder.name,
-          backendPhotos: response.photos.filter((photo, photoIndex) => 
-            folder.images.includes(allImages[photoIndex])
-          )
-        }));
-        
-        console.log('✅ Posts created with backend integration:', posts.length);
-        
-        // Notify parent component with both posts AND individual photos
-        onPost(posts, response.photos);
+        // Notify parent component
+        onPost(createdPosts);
         onClose();
         
         // Show success message
-        alert(`Successfully uploaded ${response.photos.length} photos to ${countryName}!`);
+        alert(`Successfully created ${createdPosts.length} posts in ${countryName}!`);
         
       } else {
-        throw new Error('Backend upload failed');
+        throw new Error('No posts were created successfully');
       }
       
     } catch (error) {
-      console.error('❌ Error uploading photos to backend:', error);
-      alert('Error uploading photos. Please try again.');
+      console.error('❌ Error creating posts:', error);
+      alert('Error creating posts. Please try again.');
       
       // Fallback: create local posts without backend integration
-      const posts = folders.map((folder, index) => ({
+      const localPosts = folders.filter(folder => folder.images.length > 0).map((folder, index) => ({
         id: Date.now() + Math.random() + index,
-        images: folder.images,
+        images: folder.images.map(img => ({ url: img })),
         caption: folder.caption || "",
         taggedPeople: folder.taggedPeople || [],
         location: folder.location || "",
         hideFromFeed: folder.hideFromFeed || false,
         turnOffComments: folder.turnOffComments || false,
-        likes: 0,
-        comments: 0,
+        likes: [],
+        comments: [],
+        views: 0,
         timestamp: new Date(),
         folderName: folder.name,
         isLocalOnly: true // Flag to indicate this wasn't saved to backend
       }));
       
-      onPost(posts);
+      onPost(localPosts);
       onClose();
     } finally {
       setIsUploading(false);
@@ -224,7 +241,7 @@ const UploadOrganizer = ({ selectedFiles, onClose, onPost, countryName }) => {
 
         {isUploading && (
           <div className="uploading-indicator">
-            <p>📸 Uploading photos to {countryName}...</p>
+            <p>📝 Creating posts in {countryName}...</p>
             <div className="upload-progress">Please wait...</div>
           </div>
         )}

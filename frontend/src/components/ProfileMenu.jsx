@@ -29,22 +29,22 @@ const ProfileMenu = ({ activePanel }) => {
       className={`profile-slideout ${activePanel === 'profile' ? 'open' : ''}`}
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="profile-content">
+      <div className="profile-menu-content">
         {/* Top Section */}
-        <div className="profile-header">
+        <div className="profile-menu-header">
           <div
-            className="username"
+            className="profile-menu-username"
             onClick={() => navigate("/my-profile")}
             style={{ cursor: "pointer" }}
             title="View your profile"
           >
             {user?.fullName || `${user?.firstName || ''} ${user?.lastName || ''}`.trim() || user?.username || 'User'}
           </div>
-          <div className="email">
+          <div className="profile-menu-email">
             {user?.email || 'user@example.com'}
           </div>
           <div
-            className="edit-profile"
+            className="profile-menu-edit-profile"
             onClick={() => navigate("/edit-profile")}
             style={{ cursor: "pointer" }}
             title="Edit your profile"
@@ -58,9 +58,9 @@ const ProfileMenu = ({ activePanel }) => {
         </div>
 
         {/* Middle Options */}
-        <div className="profile-options">
+        <div className="profile-menu-options">
           <div
-            className="option"
+            className="profile-menu-option"
             onClick={() => navigate("/account")}
             style={{ cursor: "pointer" }}
             title="Manage your account settings"
@@ -73,7 +73,7 @@ const ProfileMenu = ({ activePanel }) => {
           </div>
           
           <div 
-            className="option"
+            className="profile-menu-option"
             onClick={() => navigate("/social")}
             style={{ cursor: "pointer" }}
             title="Discover and connect with other explorers"
@@ -86,7 +86,7 @@ const ProfileMenu = ({ activePanel }) => {
           </div>
           
           <div 
-            className="option"
+            className="profile-menu-option"
             onClick={() => navigate("/friends")}
             style={{ cursor: "pointer" }}
             title="View and manage your friends"
@@ -99,7 +99,7 @@ const ProfileMenu = ({ activePanel }) => {
           </div>
           
           <div 
-            className="option"
+            className="profile-menu-option"
             style={{ cursor: "pointer", opacity: 0.6 }}
             title="Coming soon!"
           >
@@ -112,25 +112,25 @@ const ProfileMenu = ({ activePanel }) => {
           </div>
 
           {/* Toggles + Logout */}
-          <div className="toggle-and-logout">
-            <div className="toggle-option">
-              <label className="switch">
+          <div className="profile-menu-toggle-and-logout">
+            <div className="profile-menu-toggle-option">
+              <label className="profile-menu-switch">
                 <input 
                   type="checkbox" 
                   title="Make your travel map public or private"
                 />
-                <span className="slider round"></span>
+                <span className="profile-menu-slider round"></span>
               </label>
               <span>Public / Private Account</span>
             </div>
             
-            <div className="toggle-option">
-              <label className="switch">
+            <div className="profile-menu-toggle-option">
+              <label className="profile-menu-switch">
                 <input 
                   type="checkbox"
                   title="Switch between light and dark theme" 
                 />
-                <span className="slider round"></span>
+                <span className="profile-menu-slider round"></span>
               </label>
               <span>Light / Dark Mode</span>
             </div>
@@ -138,7 +138,7 @@ const ProfileMenu = ({ activePanel }) => {
             {/* Logout Section */}
             {!showLogoutConfirm ? (
               <div 
-                className="logout-option"
+                className="profile-menu-logout-option"
                 onClick={confirmLogout}
                 style={{ cursor: "pointer" }}
                 title="Sign out of your account"
@@ -150,7 +150,7 @@ const ProfileMenu = ({ activePanel }) => {
                 <span>Logout</span>
               </div>
             ) : (
-              <div className="logout-confirm">
+              <div className="profile-menu-logout-confirm">
                 <div style={{ 
                   marginBottom: '0.5rem', 
                   fontSize: '0.9rem', 

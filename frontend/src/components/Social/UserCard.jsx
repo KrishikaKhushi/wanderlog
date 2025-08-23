@@ -55,11 +55,13 @@ const UserCard = ({ userData, isExploring, onExplore, onAvatarClick }) => {
         )}
       </div>
       
-      <div className="user-info">
-        <h3 className="user-name">
+      <div className="card-user-info">
+        {/* Changed from h3 to div to avoid default browser heading margins */}
+        <div className="card-user-name">
           {getDisplayName(userData)} {isOwnCard && <span className="you-indicator">(You)</span>}
-        </h3>
-        <p className="user-username">@{userData.username}</p>
+        </div>
+        {/* Changed from p to div to avoid default browser paragraph margins */}
+        <div className="card-user-username">@{userData.username}</div>
         
         <div className="user-stats">
           <span><strong>{userData.explorers || 0}</strong> followers</span>
