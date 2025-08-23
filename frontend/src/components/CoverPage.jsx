@@ -86,7 +86,7 @@ export default function CoverPage({ showLogin, setShowLogin }) {
             strokeDashoffset="1000"
             className="draw-text"
           >
-            Wanderbook
+            Wanderlog
           </text>
         </svg>
 
